@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!-- Include Bootstrap 5 CSS -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link
+         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,800;1,700&display=swap"
+         rel="stylesheet">
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+         rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+         crossorigin="anonymous">
+      <link rel="stylesheet" href="home.css">
+      
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <title>Sequelize ORM Code Generator</title>
+   </head>
+   <body style="background-color:white;">
+      <main class="flex-1 flex flex-col overflow-hidden">
+         <div
+            class="flex items-center justify-between relative w-full p-0.5 bg-white dark:bg-gray-800 border-gray-900 dark:border-gray-500 border-b z-10">
+            <div class="flex"></div>
+            <div class="flex flex-1 justify-end">
+               <div class="flex flex-1 justify-evenly 2xs:justify-end p-1">
+                  <button
+                     class="flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-700 p-0.5 2xs:p-1 xs:p-2 border border-gray-400 rounded outline-black outline-2 w-16 xs:w-20">
+                     <svg
+                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-4 w-4" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                     </svg>
+                     <span class="text-xs ml-0.5 2xs:ml-1">Cancel</span>
+                  </button>
+                  <button
+                     class="flex items-center justify-center text-gray-200 bg-blue-600 dark:bg-blue-700 hover:bg-blue-400 dark:hover:bg-blue-600 p-0.5 2xs:p-1 xs:p-2 border border-gray-400 rounded outline-black outline-2 font-bold w-16 xs:w-20 2xs:ml-4">
+                     <svg
+                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-4 w-4" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                           <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                           <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                           <polyline points="7 3 7 8 15 8"></polyline>
+                        </g>
+                     </svg>
+                     <span class="text-xs ml-0.5 2xs:ml-1">Save</span>
+                  </button>
+               </div>
+            </div>
+         </div>
+         <form class="overflow-y-scroll h-full p-2 xs:p-4 sm:p-6 pt-11" autocomplete="off" data-lpignore="true"
+            data-form-type="other">
+            <div class="w-full flex flex-col max-w-screen-md mx-auto lg:max-w-screen-lg">
+               <h2 class="text-black dark:text-gray-300 text-2xl mb-4">Model</h2>
+               <fieldset class="w-full">
+                  <div class="sm:w-1/2">
+                     <div class="w-full"><label for="model-name" class="flex flex-col items-start pb-6"><span
+                        class="text-sm">Name</span><input
+                        class="w-full text-sm py-1 px-2 bg-white dark:bg-gray-900 dark:placeholder-gray-400"
+                        id="model-name" type="text" aria-invalid="false" aria-describedby="model-name-alert"
+                        autocomplete="off" data-lpignore="true" data-form-type="other"
+                        value=""></label><span id="model-name-alert" class="text-red-700 text-xs"
+                        aria-hidden="true"></span></div>
+                  </div>
+               </fieldset>
+            </div>
+            <div class="w-full flex flex-col max-w-screen-md mx-auto lg:max-w-screen-lg mb-6">
+               <h3 class="text-black dark:text-gray-300 text-2xl mb-4">Fields</h3>
+               <ul class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 gap-6 auto-rows-fr w-full">
+                  <li
+                     class="border border-gray-400 dark:border-gray-600 rounded bg-white dark:bg-gray-800 w-full h-full">
+                     <fieldset class="p-2 xs:p-4 pt-8 grid grid-cols-12 gap-y-0 gap-x-4 relative">
+                        <button
+                           type="button"
+                           class="p-1 hover:bg-gray-200 dark:hover:bg-gray-600 absolute top-0 right-0 p-1">
+                           <svg
+                              xmlns="http://www.w3.org/2000/svg" aria-hidden="false" class="h-6 w-6" fill="none"
+                              viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                              <title>delete</title>
+                              <path stroke-linecap="round" stroke-linejoin="round"
+                                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                              </path>
+                           </svg>
+                        </button>
+                        <div class="w-full col-span-12"><label for="field-name-A-vb0CS7NR0L6wKkIDy-2"
+                           class="flex flex-col items-start pb-6"><span class="text-sm">Field name</span><input
+                           class="w-full text-sm py-1 px-2 bg-white dark:bg-gray-900 dark:placeholder-gray-400"
+                           id="field-name-A-vb0CS7NR0L6wKkIDy-2" type="text" aria-invalid="false"
+                           aria-describedby="field-name-A-vb0CS7NR0L6wKkIDy-2-alert" autocomplete="off"
+                           data-lpignore="true" data-form-type="other" value="emp_no"></label><span
+                           id="field-name-A-vb0CS7NR0L6wKkIDy-2-alert" class="text-red-700 text-xs"
+                           aria-hidden="true"></span></div>
+                        <div class="w-full col-span-12 xs:col-span-6">
+                           <label for="field-type-A-vb0CS7NR0L6wKkIDy-2"
+                              class="flex flex-col items-start pb-6">
+                              <span class="text-sm">Data type</span>
+                              <select
+                                 id="field-type-A-vb0CS7NR0L6wKkIDy-2"
+                                 class="bg-white dark:bg-gray-900 p-1 px-2 w-full cursor-pointer text-sm"
+                                 aria-invalid="false" aria-describedby="field-type-A-vb0CS7NR0L6wKkIDy-2-alert"
+                                 autocomplete="off" data-lpignore="true" data-form-type="other">
+                                 <option value="String">String</option>
+                                 <option value="Text">Text</option>
+                                 <option value="CiText">CI Text</option>
+                                 <option value="Integer">Integer</option>
+                                 <option value="BigInt">Big Int</option>
+                                 <option value="SmallInt">Small Int</option>
+                                 <option value="Float">Float</option>
+                                 <option value="Real">Real</option>
+                                 <option value="Double">Double</option>
+                                 <option value="Decimal">Decimal</option>
+                                 <option value="DateTime">Date Time</option>
+                                 <option value="Date">Date</option>
+                                 <option value="Time">Time</option>
+                                 <option value="Boolean">Boolean</option>
+                                 <option value="Enum">Enum</option>
+                                 <option value="Array">Array</option>
+                                 <option value="Json">JSON</option>
+                                 <option value="JsonB">JSONB</option>
+                                 <option value="Blob">Blob</option>
+                                 <option value="Uuid">UUID</option>
+                              </select>
+                           </label>
+                           <span id="field-type-A-vb0CS7NR0L6wKkIDy-2-alert"
+                              class="text-red-700 text-xs" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-span-12 xs:col-span-6 row-span-4 mb-4 xs:mb-0 flex">
+                           <div class="flex flex-col justify-center self-start pt-4"><label
+                              class="flex items-center" for="field-unsigned-A-vb0CS7NR0L6wKkIDy-2"><input
+                              id="field-unsigned-A-vb0CS7NR0L6wKkIDy-2"
+                              class="cursor-pointer bg-white dark:bg-gray-900 dark:checked:bg-blue-500 dark:focus:ring-offset-black"
+                              type="checkbox" autocomplete="off" data-lpignore="true"
+                              data-form-type="other"><span
+                              class="pl-2 text-sm">Unsigned</span></label><label class="flex items-center"
+                              for="field-autoincrement-A-vb0CS7NR0L6wKkIDy-2"><input
+                              id="field-autoincrement-A-vb0CS7NR0L6wKkIDy-2"
+                              class="cursor-pointer bg-white dark:bg-gray-900 dark:checked:bg-blue-500 dark:focus:ring-offset-black"
+                              type="checkbox" autocomplete="off" data-lpignore="true"
+                              data-form-type="other" checked=""><span
+                              class="pl-2 text-sm">Autoincrement</span></label></div>
+                        </div>
+                        <div class="col-span-12 xs:col-span-6 flex flex-col"><label class="flex items-center"
+                           for="field-pk-A-vb0CS7NR0L6wKkIDy-2"><input id="field-pk-A-vb0CS7NR0L6wKkIDy-2"
+                           class="cursor-pointer bg-white dark:bg-gray-900 dark:checked:bg-blue-500 dark:focus:ring-offset-black"
+                           type="checkbox" autocomplete="off" data-lpignore="true" data-form-type="other"
+                           checked=""><span class="pl-2 text-sm">Primary key</span></label><label
+                           class="flex items-center" for="field-required-A-vb0CS7NR0L6wKkIDy-2"><input
+                           id="field-required-A-vb0CS7NR0L6wKkIDy-2"
+                           class="cursor-pointer bg-white dark:bg-gray-900 dark:checked:bg-blue-500 dark:focus:ring-offset-black"
+                           type="checkbox" autocomplete="off" data-lpignore="true" data-form-type="other"
+                           checked=""><span class="pl-2 text-sm">Required</span></label><label
+                           class="flex items-center" for="field-unique-A-vb0CS7NR0L6wKkIDy-2"><input
+                           id="field-unique-A-vb0CS7NR0L6wKkIDy-2"
+                           class="cursor-pointer bg-white dark:bg-gray-900 dark:checked:bg-blue-500 dark:focus:ring-offset-black"
+                           type="checkbox" autocomplete="off" data-lpignore="true"
+                           data-form-type="other"><span class="pl-2 text-sm">Unique</span></label></div>
+                     </fieldset>
+                  </li>
+                  <li
+                     class="border border-gray-400 dark:border-gray-600 rounded bg-white dark:bg-gray-800 w-full h-full">
+                     <fieldset class="p-2 xs:p-4 pt-8 grid grid-cols-12 gap-y-0 gap-x-4 relative">
+                        <button
+                           type="button"
+                           class="p-1 hover:bg-gray-200 dark:hover:bg-gray-600 absolute top-0 right-0 p-1">
+                           <svg
+                              xmlns="http://www.w3.org/2000/svg" aria-hidden="false" class="h-6 w-6" fill="none"
+                              viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                              <title>delete</title>
+                              <path stroke-linecap="round" stroke-linejoin="round"
+                                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                              </path>
+                           </svg>
+                        </button>
+                        <div class="w-full col-span-12"><label for="field-name-lmAJR97tTyctA_n7eV1jL"
+                           class="flex flex-col items-start pb-6"><span class="text-sm">Field name</span><input
+                           class="w-full text-sm py-1 px-2 bg-white dark:bg-gray-900 dark:placeholder-gray-400"
+                           id="field-name-lmAJR97tTyctA_n7eV1jL" type="text" aria-invalid="false"
+                           aria-describedby="field-name-lmAJR97tTyctA_n7eV1jL-alert" autocomplete="off"
+                           data-lpignore="true" data-form-type="other" value="birth_date"></label><span
+                           id="field-name-lmAJR97tTyctA_n7eV1jL-alert" class="text-red-700 text-xs"
+                           aria-hidden="true"></span></div>
+                        <div class="w-full col-span-12 xs:col-span-6">
+                           <label for="field-type-lmAJR97tTyctA_n7eV1jL"
+                              class="flex flex-col items-start pb-6">
+                              <span class="text-sm">Data type</span>
+                              <select
+                                 id="field-type-lmAJR97tTyctA_n7eV1jL"
+                                 class="bg-white dark:bg-gray-900 p-1 px-2 w-full cursor-pointer text-sm"
+                                 aria-invalid="false" aria-describedby="field-type-lmAJR97tTyctA_n7eV1jL-alert"
+                                 autocomplete="off" data-lpignore="true" data-form-type="other">
+                                 <option value="String">String</option>
+                                 <option value="Text">Text</option>
+                                 <option value="CiText">CI Text</option>
+                                 <option value="Integer">Integer</option>
+                                 <option value="BigInt">Big Int</option>
+                                 <option value="SmallInt">Small Int</option>
+                                 <option value="Float">Float</option>
+                                 <option value="Real">Real</option>
+                                 <option value="Double">Double</option>
+                                 <option value="Decimal">Decimal</option>
+                                 <option value="DateTime">Date Time</option>
+                                 <option value="Date">Date</option>
+                                 <option value="Time">Time</option>
+                                 <option value="Boolean">Boolean</option>
+                                 <option value="Enum">Enum</option>
+                                 <option value="Array">Array</option>
+                                 <option value="Json">JSON</option>
+                                 <option value="JsonB">JSONB</option>
+                                 <option value="Blob">Blob</option>
+                                 <option value="Uuid">UUID</option>
+                              </select>
+                           </label>
+                           <span id="field-type-lmAJR97tTyctA_n7eV1jL-alert"
+                              class="text-red-700 text-xs" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-span-12 xs:col-span-6 row-span-4 mb-4 xs:mb-0 flex">
+                           <div class="flex flex-col justify-center self-start pt-4"><label
+                              class="flex items-center" for="field-default-now-lmAJR97tTyctA_n7eV1jL"><input
+                              id="field-default-now-lmAJR97tTyctA_n7eV1jL"
+                              class="cursor-pointer bg-white dark:bg-gray-900 dark:checked:bg-blue-500 dark:focus:ring-offset-black"
+                              type="checkbox" autocomplete="off" data-lpignore="true"
+                              data-form-type="other"><span class="pl-2 text-sm">Default to
+                              now</span></label>
+                           </div>
+                        </div>
+                        <div class="col-span-12 xs:col-span-6 flex flex-col"><label class="flex items-center"
+                           for="field-pk-lmAJR97tTyctA_n7eV1jL"><input id="field-pk-lmAJR97tTyctA_n7eV1jL"
+                           class="cursor-pointer bg-white dark:bg-gray-900 dark:checked:bg-blue-500 dark:focus:ring-offset-black"
+                           type="checkbox" autocomplete="off" data-lpignore="true"
+                           data-form-type="other"><span class="pl-2 text-sm">Primary
+                           key</span></label><label class="flex items-center"
+                              for="field-required-lmAJR97tTyctA_n7eV1jL"><input
+                              id="field-required-lmAJR97tTyctA_n7eV1jL"
+                              class="cursor-pointer bg-white dark:bg-gray-900 dark:checked:bg-blue-500 dark:focus:ring-offset-black"
+                              type="checkbox" autocomplete="off" data-lpignore="true" data-form-type="other"
+                              checked=""><span class="pl-2 text-sm">Required</span></label><label
+                              class="flex items-center" for="field-unique-lmAJR97tTyctA_n7eV1jL"><input
+                              id="field-unique-lmAJR97tTyctA_n7eV1jL"
+                              class="cursor-pointer bg-white dark:bg-gray-900 dark:checked:bg-blue-500 dark:focus:ring-offset-black"
+                              type="checkbox" autocomplete="off" data-lpignore="true"
+                              data-form-type="other"><span class="pl-2 text-sm">Unique</span></label>
+                        </div>
+                     </fieldset>
+                  </li>
+                  <li
+                     class="border border-gray-400 dark:border-gray-600 rounded bg-white dark:bg-gray-800 w-full h-full">
+                     <fieldset class="p-2 xs:p-4 pt-8 grid grid-cols-12 gap-y-0 gap-x-4 relative">
+                        <button
+                           type="button"
+                           class="p-1 hover:bg-gray-200 dark:hover:bg-gray-600 absolute top-0 right-0 p-1">
+                           <svg
+                              xmlns="http://www.w3.org/2000/svg" aria-hidden="false" class="h-6 w-6" fill="none"
+                              viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                              <title>delete</title>
+                              <path stroke-linecap="round" stroke-linejoin="round"
+                                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                              </path>
+                           </svg>
+                        </button>
+                        <div class="w-full col-span-12"><label for="field-name-XMN1K4ZX4ry9tvbrXQssY"
+                           class="flex flex-col items-start pb-6"><span class="text-sm">Field name</span><input
+                           class="w-full text-sm py-1 px-2 bg-white dark:bg-gray-900 dark:placeholder-gray-400"
+                           id="field-name-XMN1K4ZX4ry9tvbrXQssY" type="text" aria-invalid="false"
+                           aria-describedby="field-name-XMN1K4ZX4ry9tvbrXQssY-alert" autocomplete="off"
+                           data-lpignore="true" data-form-type="other" value="first_name"></label><span
+                           id="field-name-XMN1K4ZX4ry9tvbrXQssY-alert" class="text-red-700 text-xs"
+                           aria-hidden="true"></span></div>
+                        <div class="w-full col-span-12 xs:col-span-6">
+                           <label for="field-type-XMN1K4ZX4ry9tvbrXQssY"
+                              class="flex flex-col items-start pb-6">
+                              <span class="text-sm">Data type</span>
+                              <select
+                                 id="field-type-XMN1K4ZX4ry9tvbrXQssY"
+                                 class="bg-white dark:bg-gray-900 p-1 px-2 w-full cursor-pointer text-sm"
+                                 aria-invalid="false" aria-describedby="field-type-XMN1K4ZX4ry9tvbrXQssY-alert"
+                                 autocomplete="off" data-lpignore="true" data-form-type="other">
+                                 <option value="String">String</option>
+                                 <option value="Text">Text</option>
+                                 <option value="CiText">CI Text</option>
+                                 <option value="Integer">Integer</option>
+                                 <option value="BigInt">Big Int</option>
+                                 <option value="SmallInt">Small Int</option>
+                                 <option value="Float">Float</option>
+                                 <option value="Real">Real</option>
+                                 <option value="Double">Double</option>
+                                 <option value="Decimal">Decimal</option>
+                                 <option value="DateTime">Date Time</option>
+                                 <option value="Date">Date</option>
+                                 <option value="Time">Time</option>
+                                 <option value="Boolean">Boolean</option>
+                                 <option value="Enum">Enum</option>
+                                 <option value="Array">Array</option>
+                                 <option value="Json">JSON</option>
+                                 <option value="JsonB">JSONB</option>
+                                 <option value="Blob">Blob</option>
+                                 <option value="Uuid">UUID</option>
+                              </select>
+                           </label>
+                           <span id="field-type-XMN1K4ZX4ry9tvbrXQssY-alert"
+                              class="text-red-700 text-xs" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-span-12 xs:col-span-6 row-span-4 mb-4 xs:mb-0 flex">
+                           <div class="w-full"><label for="field-string-length-XMN1K4ZX4ry9tvbrXQssY"
+                              class="flex flex-col items-start pb-6"><span class="text-sm">Length</span><input
+                              class="py-1 px-2 p-0.5 w-full text-sm bg-white dark:bg-gray-900 dark:placeholder-gray-400"
+                              id="field-string-length-XMN1K4ZX4ry9tvbrXQssY" type="number" min="1"
+                              max="65535" aria-invalid="false"
+                              aria-describedby="field-string-length-XMN1K4ZX4ry9tvbrXQssY-alert"
+                              autocomplete="off" data-lpignore="true" data-form-type="other"
+                              value=""></label><span id="field-string-length-XMN1K4ZX4ry9tvbrXQssY-alert"
+                              class="text-red-700 text-xs" aria-hidden="true"></span></div>
+                        </div>
+                        <div class="col-span-12 xs:col-span-6 flex flex-col"><label class="flex items-center"
+                           for="field-pk-XMN1K4ZX4ry9tvbrXQssY"><input id="field-pk-XMN1K4ZX4ry9tvbrXQssY"
+                           class="cursor-pointer bg-white dark:bg-gray-900 dark:checked:bg-blue-500 dark:focus:ring-offset-black"
+                           type="checkbox" autocomplete="off" data-lpignore="true"
+                           data-form-type="other"><span class="pl-2 text-sm">Primary
+                           key</span></label><label class="flex items-center"
+                              for="field-required-XMN1K4ZX4ry9tvbrXQssY"><input
+                              id="field-required-XMN1K4ZX4ry9tvbrXQssY"
+                              class="cursor-pointer bg-white dark:bg-gray-900 dark:checked:bg-blue-500 dark:focus:ring-offset-black"
+                              type="checkbox" autocomplete="off" data-lpignore="true" data-form-type="other"
+                              checked=""><span class="pl-2 text-sm">Required</span></label><label
+                              class="flex items-center" for="field-unique-XMN1K4ZX4ry9tvbrXQssY"><input
+                              id="field-unique-XMN1K4ZX4ry9tvbrXQssY"
+                              class="cursor-pointer bg-white dark:bg-gray-900 dark:checked:bg-blue-500 dark:focus:ring-offset-black"
+                              type="checkbox" autocomplete="off" data-lpignore="true"
+                              data-form-type="other"><span class="pl-2 text-sm">Unique</span></label>
+                        </div>
+                     </fieldset>
+                  </li>
+                  <li
+                     class="border border-gray-400 dark:border-gray-600 rounded bg-white dark:bg-gray-800 w-full h-full">
+                     <fieldset class="p-2 xs:p-4 pt-8 grid grid-cols-12 gap-y-0 gap-x-4 relative">
+                        <button
+                           type="button"
+                           class="p-1 hover:bg-gray-200 dark:hover:bg-gray-600 absolute top-0 right-0 p-1">
+                           <svg
+                              xmlns="http://www.w3.org/2000/svg" aria-hidden="false" class="h-6 w-6" fill="none"
+                              viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                              <title>delete</title>
+                              <path stroke-linecap="round" stroke-linejoin="round"
+                                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                              </path>
+                           </svg>
+                        </button>
+                        <div class="w-full col-span-12"><label for="field-name-WzM-w67wbBtvLRpJP39le"
+                           class="flex flex-col items-start pb-6"><span class="text-sm">Field name</span><input
+                           class="w-full text-sm py-1 px-2 bg-white dark:bg-gray-900 dark:placeholder-gray-400"
+                           id="field-name-WzM-w67wbBtvLRpJP39le" type="text" aria-invalid="false"
+                           aria-describedby="field-name-WzM-w67wbBtvLRpJP39le-alert" autocomplete="off"
+                           data-lpignore="true" data-form-type="other" value="last_name"></label><span
+                           id="field-name-WzM-w67wbBtvLRpJP39le-alert" class="text-red-700 text-xs"
+                           aria-hidden="true"></span></div>
+                        <div class="w-full col-span-12 xs:col-span-6">
+                           <label for="field-type-WzM-w67wbBtvLRpJP39le"
+                              class="flex flex-col items-start pb-6">
+                              <span class="text-sm">Data type</span>
+                              <select
+                                 id="field-type-WzM-w67wbBtvLRpJP39le"
+                                 class="bg-white dark:bg-gray-900 p-1 px-2 w-full cursor-pointer text-sm"
+                                 aria-invalid="false" aria-describedby="field-type-WzM-w67wbBtvLRpJP39le-alert"
+                                 autocomplete="off" data-lpignore="true" data-form-type="other">
+                                 <option value="String">String</option>
+                                 <option value="Text">Text</option>
+                                 <option value="CiText">CI Text</option>
+                                 <option value="Integer">Integer</option>
+                                 <option value="BigInt">Big Int</option>
+                                 <option value="SmallInt">Small Int</option>
+                                 <option value="Float">Float</option>
+                                 <option value="Real">Real</option>
+                                 <option value="Double">Double</option>
+                                 <option value="Decimal">Decimal</option>
+                                 <option value="DateTime">Date Time</option>
+                                 <option value="Date">Date</option>
+                                 <option value="Time">Time</option>
+                                 <option value="Boolean">Boolean</option>
+                                 <option value="Enum">Enum</option>
+                                 <option value="Array">Array</option>
+                                 <option value="Json">JSON</option>
+                                 <option value="JsonB">JSONB</option>
+                                 <option value="Blob">Blob</option>
+                                 <option value="Uuid">UUID</option>
+                              </select>
+                           </label>
+                           <span id="field-type-WzM-w67wbBtvLRpJP39le-alert"
+                              class="text-red-700 text-xs" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-span-12 xs:col-span-6 row-span-4 mb-4 xs:mb-0 flex">
+                           <div class="w-full"><label for="field-string-length-WzM-w67wbBtvLRpJP39le"
+                              class="flex flex-col items-start pb-6"><span class="text-sm">Length</span><input
+                              class="py-1 px-2 p-0.5 w-full text-sm bg-white dark:bg-gray-900 dark:placeholder-gray-400"
+                              id="field-string-length-WzM-w67wbBtvLRpJP39le" type="number" min="1"
+                              max="65535" aria-invalid="false"
+                              aria-describedby="field-string-length-WzM-w67wbBtvLRpJP39le-alert"
+                              autocomplete="off" data-lpignore="true" data-form-type="other"
+                              value=""></label><span id="field-string-length-WzM-w67wbBtvLRpJP39le-alert"
+                              class="text-red-700 text-xs" aria-hidden="true"></span></div>
+                        </div>
+                        <div class="col-span-12 xs:col-span-6 flex flex-col"><label class="flex items-center"
+                           for="field-pk-WzM-w67wbBtvLRpJP39le"><input id="field-pk-WzM-w67wbBtvLRpJP39le"
+                           class="cursor-pointer bg-white dark:bg-gray-900 dark:checked:bg-blue-500 dark:focus:ring-offset-black"
+                           type="checkbox" autocomplete="off" data-lpignore="true"
+                           data-form-type="other"><span class="pl-2 text-sm">Primary
+                           key</span></label><label class="flex items-center"
+                              for="field-required-WzM-w67wbBtvLRpJP39le"><input
+                              id="field-required-WzM-w67wbBtvLRpJP39le"
+                              class="cursor-pointer bg-white dark:bg-gray-900 dark:checked:bg-blue-500 dark:focus:ring-offset-black"
+                              type="checkbox" autocomplete="off" data-lpignore="true" data-form-type="other"
+                              checked=""><span class="pl-2 text-sm">Required</span></label><label
+                              class="flex items-center" for="field-unique-WzM-w67wbBtvLRpJP39le"><input
+                              id="field-unique-WzM-w67wbBtvLRpJP39le"
+                              class="cursor-pointer bg-white dark:bg-gray-900 dark:checked:bg-blue-500 dark:focus:ring-offset-black"
+                              type="checkbox" autocomplete="off" data-lpignore="true"
+                              data-form-type="other"><span class="pl-2 text-sm">Unique</span></label>
+                        </div>
+                     </fieldset>
+                  </li>
+                  <li
+                     class="border border-gray-400 dark:border-gray-600 rounded bg-white dark:bg-gray-800 w-full h-full">
+                     <fieldset class="p-2 xs:p-4 pt-8 grid grid-cols-12 gap-y-0 gap-x-4 relative">
+                        <button
+                           type="button"
+                           class="p-1 hover:bg-gray-200 dark:hover:bg-gray-600 absolute top-0 right-0 p-1">
+                           <svg
+                              xmlns="http://www.w3.org/2000/svg" aria-hidden="false" class="h-6 w-6" fill="none"
+                              viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                              <title>delete</title>
+                              <path stroke-linecap="round" stroke-linejoin="round"
+                                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                              </path>
+                           </svg>
+                        </button>
+                        <div class="w-full col-span-12"><label for="field-name-bwdKnfLZR-vM8kocLSKU2"
+                           class="flex flex-col items-start pb-6"><span class="text-sm">Field name</span><input
+                           class="w-full text-sm py-1 px-2 bg-white dark:bg-gray-900 dark:placeholder-gray-400"
+                           id="field-name-bwdKnfLZR-vM8kocLSKU2" type="text" aria-invalid="false"
+                           aria-describedby="field-name-bwdKnfLZR-vM8kocLSKU2-alert" autocomplete="off"
+                           data-lpignore="true" data-form-type="other" value="gender"></label><span
+                           id="field-name-bwdKnfLZR-vM8kocLSKU2-alert" class="text-red-700 text-xs"
+                           aria-hidden="true"></span></div>
+                        <div class="w-full col-span-12 xs:col-span-6">
+                           <label for="field-type-bwdKnfLZR-vM8kocLSKU2"
+                              class="flex flex-col items-start pb-6">
+                              <span class="text-sm">Data type</span>
+                              <select
+                                 id="field-type-bwdKnfLZR-vM8kocLSKU2"
+                                 class="bg-white dark:bg-gray-900 p-1 px-2 w-full cursor-pointer text-sm"
+                                 aria-invalid="false" aria-describedby="field-type-bwdKnfLZR-vM8kocLSKU2-alert"
+                                 autocomplete="off" data-lpignore="true" data-form-type="other">
+                                 <option value="String">String</option>
+                                 <option value="Text">Text</option>
+                                 <option value="CiText">CI Text</option>
+                                 <option value="Integer">Integer</option>
+                                 <option value="BigInt">Big Int</option>
+                                 <option value="SmallInt">Small Int</option>
+                                 <option value="Float">Float</option>
+                                 <option value="Real">Real</option>
+                                 <option value="Double">Double</option>
+                                 <option value="Decimal">Decimal</option>
+                                 <option value="DateTime">Date Time</option>
+                                 <option value="Date">Date</option>
+                                 <option value="Time">Time</option>
+                                 <option value="Boolean">Boolean</option>
+                                 <option value="Enum">Enum</option>
+                                 <option value="Array">Array</option>
+                                 <option value="Json">JSON</option>
+                                 <option value="JsonB">JSONB</option>
+                                 <option value="Blob">Blob</option>
+                                 <option value="Uuid">UUID</option>
+                              </select>
+                           </label>
+                           <span id="field-type-bwdKnfLZR-vM8kocLSKU2-alert"
+                              class="text-red-700 text-xs" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-span-12 xs:col-span-6 row-span-4 mb-4 xs:mb-0 flex">
+                           <div class="w-full"><label for="field-enum-values-bwdKnfLZR-vM8kocLSKU2"
+                              class="flex flex-col items-start pb-6"><span class="text-sm">Enum
+                              values</span><textarea id="field-enum-values-bwdKnfLZR-vM8kocLSKU2"
+                                 class="w-full text-sm" aria-invalid="false"
+                                 aria-describedby="field-enum-values-bwdKnfLZR-vM8kocLSKU2-alert"
+                                 autocomplete="off" data-lpignore="true" data-form-type="other" rows="4">M
+                              F
+                              O</textarea></label><span id="field-enum-values-bwdKnfLZR-vM8kocLSKU2-alert" class="text-red-700 text-xs"
+                                 aria-hidden="true"></span>
+                           </div>
+                        </div>
+                        <div class="col-span-12 xs:col-span-6 flex flex-col"><label class="flex items-center"
+                           for="field-pk-bwdKnfLZR-vM8kocLSKU2"><input id="field-pk-bwdKnfLZR-vM8kocLSKU2"
+                           class="cursor-pointer bg-white dark:bg-gray-900 dark:checked:bg-blue-500 dark:focus:ring-offset-black"
+                           type="checkbox" autocomplete="off" data-lpignore="true"
+                           data-form-type="other"><span class="pl-2 text-sm">Primary
+                           key</span></label><label class="flex items-center"
+                              for="field-required-bwdKnfLZR-vM8kocLSKU2"><input
+                              id="field-required-bwdKnfLZR-vM8kocLSKU2"
+                              class="cursor-pointer bg-white dark:bg-gray-900 dark:checked:bg-blue-500 dark:focus:ring-offset-black"
+                              type="checkbox" autocomplete="off" data-lpignore="true" data-form-type="other"
+                              checked=""><span class="pl-2 text-sm">Required</span></label><label
+                              class="flex items-center" for="field-unique-bwdKnfLZR-vM8kocLSKU2"><input
+                              id="field-unique-bwdKnfLZR-vM8kocLSKU2"
+                              class="cursor-pointer bg-white dark:bg-gray-900 dark:checked:bg-blue-500 dark:focus:ring-offset-black"
+                              type="checkbox" autocomplete="off" data-lpignore="true"
+                              data-form-type="other"><span class="pl-2 text-sm">Unique</span></label>
+                        </div>
+                     </fieldset>
+                  </li>
+                  <li
+                     class="border border-gray-400 dark:border-gray-600 rounded bg-white dark:bg-gray-800 w-full h-full">
+                     <fieldset class="p-2 xs:p-4 pt-8 grid grid-cols-12 gap-y-0 gap-x-4 relative">
+                        <button
+                           type="button"
+                           class="p-1 hover:bg-gray-200 dark:hover:bg-gray-600 absolute top-0 right-0 p-1">
+                           <svg
+                              xmlns="http://www.w3.org/2000/svg" aria-hidden="false" class="h-6 w-6" fill="none"
+                              viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                              <title>delete</title>
+                              <path stroke-linecap="round" stroke-linejoin="round"
+                                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                              </path>
+                           </svg>
+                        </button>
+                        <div class="w-full col-span-12"><label for="field-name-r-9WLhnQx4r3AV9HXm9Tp"
+                           class="flex flex-col items-start pb-6"><span class="text-sm">Field name</span><input
+                           class="w-full text-sm py-1 px-2 bg-white dark:bg-gray-900 dark:placeholder-gray-400"
+                           id="field-name-r-9WLhnQx4r3AV9HXm9Tp" type="text" aria-invalid="false"
+                           aria-describedby="field-name-r-9WLhnQx4r3AV9HXm9Tp-alert" autocomplete="off"
+                           data-lpignore="true" data-form-type="other" value="hire_date"></label><span
+                           id="field-name-r-9WLhnQx4r3AV9HXm9Tp-alert" class="text-red-700 text-xs"
+                           aria-hidden="true"></span></div>
+                        <div class="w-full col-span-12 xs:col-span-6">
+                           <label for="field-type-r-9WLhnQx4r3AV9HXm9Tp"
+                              class="flex flex-col items-start pb-6">
+                              <span class="text-sm">Data type</span>
+                              <select
+                                 id="field-type-r-9WLhnQx4r3AV9HXm9Tp"
+                                 class="bg-white dark:bg-gray-900 p-1 px-2 w-full cursor-pointer text-sm"
+                                 aria-invalid="false" aria-describedby="field-type-r-9WLhnQx4r3AV9HXm9Tp-alert"
+                                 autocomplete="off" data-lpignore="true" data-form-type="other">
+                                 <option value="String">String</option>
+                                 <option value="Text">Text</option>
+                                 <option value="CiText">CI Text</option>
+                                 <option value="Integer">Integer</option>
+                                 <option value="BigInt">Big Int</option>
+                                 <option value="SmallInt">Small Int</option>
+                                 <option value="Float">Float</option>
+                                 <option value="Real">Real</option>
+                                 <option value="Double">Double</option>
+                                 <option value="Decimal">Decimal</option>
+                                 <option value="DateTime">Date Time</option>
+                                 <option value="Date">Date</option>
+                                 <option value="Time">Time</option>
+                                 <option value="Boolean">Boolean</option>
+                                 <option value="Enum">Enum</option>
+                                 <option value="Array">Array</option>
+                                 <option value="Json">JSON</option>
+                                 <option value="JsonB">JSONB</option>
+                                 <option value="Blob">Blob</option>
+                                 <option value="Uuid">UUID</option>
+                              </select>
+                           </label>
+                           <span id="field-type-r-9WLhnQx4r3AV9HXm9Tp-alert"
+                              class="text-red-700 text-xs" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-span-12 xs:col-span-6 row-span-4 mb-4 xs:mb-0 flex">
+                           <div class="flex flex-col justify-center self-start pt-4"><label
+                              class="flex items-center" for="field-default-now-r-9WLhnQx4r3AV9HXm9Tp"><input
+                              id="field-default-now-r-9WLhnQx4r3AV9HXm9Tp"
+                              class="cursor-pointer bg-white dark:bg-gray-900 dark:checked:bg-blue-500 dark:focus:ring-offset-black"
+                              type="checkbox" autocomplete="off" data-lpignore="true"
+                              data-form-type="other"><span class="pl-2 text-sm">Default to
+                              now</span></label>
+                           </div>
+                        </div>
+                        <div class="col-span-12 xs:col-span-6 flex flex-col"><label class="flex items-center"
+                           for="field-pk-r-9WLhnQx4r3AV9HXm9Tp"><input id="field-pk-r-9WLhnQx4r3AV9HXm9Tp"
+                           class="cursor-pointer bg-white dark:bg-gray-900 dark:checked:bg-blue-500 dark:focus:ring-offset-black"
+                           type="checkbox" autocomplete="off" data-lpignore="true"
+                           data-form-type="other"><span class="pl-2 text-sm">Primary
+                           key</span></label><label class="flex items-center"
+                              for="field-required-r-9WLhnQx4r3AV9HXm9Tp"><input
+                              id="field-required-r-9WLhnQx4r3AV9HXm9Tp"
+                              class="cursor-pointer bg-white dark:bg-gray-900 dark:checked:bg-blue-500 dark:focus:ring-offset-black"
+                              type="checkbox" autocomplete="off" data-lpignore="true" data-form-type="other"
+                              checked=""><span class="pl-2 text-sm">Required</span></label><label
+                              class="flex items-center" for="field-unique-r-9WLhnQx4r3AV9HXm9Tp"><input
+                              id="field-unique-r-9WLhnQx4r3AV9HXm9Tp"
+                              class="cursor-pointer bg-white dark:bg-gray-900 dark:checked:bg-blue-500 dark:focus:ring-offset-black"
+                              type="checkbox" autocomplete="off" data-lpignore="true"
+                              data-form-type="other"><span class="pl-2 text-sm">Unique</span></label>
+                        </div>
+                     </fieldset>
+                  </li>
+                  <li>
+                     <button type="button"
+                        class="hover:bg-green-50 dark:hover:bg-green-900 border border-gray-400 dark:border-gray-600 rounded bg-white dark:bg-gray-800 w-full h-full p-2 hover:border-gray-800 dark:hover:border-gray-400 flex items-center justify-center min-h-16 text-lg border-dashed hover:border-gray-800">
+                        <span
+                           class="mr-2">
+                           <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-6 w-6"
+                              fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                              <path stroke-linecap="round" stroke-linejoin="round"
+                                 d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                           </svg>
+                        </span>
+                        Add Field
+                     </button>
+                  </li>
+               </ul>
+            </div>
+            <div class="w-full flex flex-col max-w-screen-md mx-auto lg:max-w-screen-lg">
+               <h3 class="text-black dark:text-gray-300 text-2xl mb-4">Associations</h3>
+               <ul class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 gap-6 auto-rows-fr w-full">
+                  <li
+                     class="border border-gray-400 dark:border-gray-600 rounded bg-white dark:bg-gray-800 w-full h-full">
+                     <fieldset class="p-2 xs:p-4 pt-8 grid grid-cols-12 gap-y-0 gap-x-4 relative pb-0">
+                        <button
+                           type="button"
+                           class="p-1 hover:bg-gray-200 dark:hover:bg-gray-600 absolute top-0 right-0 p-1">
+                           <svg
+                              xmlns="http://www.w3.org/2000/svg" aria-hidden="false" class="h-6 w-6" fill="none"
+                              viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                              <title>delete</title>
+                              <path stroke-linecap="round" stroke-linejoin="round"
+                                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                              </path>
+                           </svg>
+                        </button>
+                        <div class="w-full col-span-6">
+                           <label for="association-type-NSZxbNZMkaNPyZ6v_fbwI"
+                              class="flex flex-col items-start pb-6">
+                              <span class="text-sm">Type</span>
+                              <select
+                                 id="association-type-NSZxbNZMkaNPyZ6v_fbwI"
+                                 class="bg-white dark:bg-gray-900 p-1 px-2 w-full cursor-pointer text-sm"
+                                 aria-invalid="false"
+                                 aria-describedby="association-type-NSZxbNZMkaNPyZ6v_fbwI-alert"
+                                 autocomplete="off" data-lpignore="true" data-form-type="other">
+                                 <option value="BelongsTo">belongs to</option>
+                                 <option value="HasOne">has one</option>
+                                 <option value="HasMany">has many</option>
+                                 <option value="ManyToMany">many to many</option>
+                              </select>
+                           </label>
+                           <span id="association-type-NSZxbNZMkaNPyZ6v_fbwI-alert"
+                              class="text-red-700 text-xs" aria-hidden="true"></span>
+                        </div>
+                        <div class="w-full col-span-6">
+                           <label for="association-target-model-NSZxbNZMkaNPyZ6v_fbwI"
+                              class="flex flex-col items-start pb-6">
+                              <span class="text-sm">Target
+                              model</span>
+                              <select id="association-target-model-NSZxbNZMkaNPyZ6v_fbwI"
+                                 class="bg-white dark:bg-gray-900 p-1 px-2 w-full cursor-pointer text-sm"
+                                 aria-invalid="false"
+                                 aria-describedby="association-target-model-NSZxbNZMkaNPyZ6v_fbwI-alert"
+                                 autocomplete="off" data-lpignore="true" data-form-type="other">
+                                 <option value="8AjE1F73O7k-d_8424U8A">employees</option>
+                                 <option value="UFlpanwFL8szZo5dtQct-">departments</option>
+                                 <option value="hs68eEzZVDTT7MEegYEvH">dept_emp</option>
+                                 <option value="zjM4z8Y5pvecG7TjIVajw">dept_manager</option>
+                                 <option value="Ky0xNM91RIzSFEKcWUqZS">titles</option>
+                                 <option value="Xq55KHZ19UT9ob31iT_D_">salaries</option>
+                              </select>
+                           </label>
+                           <span id="association-target-model-NSZxbNZMkaNPyZ6v_fbwI-alert"
+                              class="text-red-700 text-xs" aria-hidden="true"></span>
+                        </div>
+                        <div class="w-full col-span-6"><label for="association-alias-NSZxbNZMkaNPyZ6v_fbwI"
+                           class="flex flex-col items-start pb-6"><span class="text-sm">as</span><input
+                           class="w-full text-sm py-1 px-2 bg-white dark:bg-gray-900 dark:placeholder-gray-400"
+                           id="association-alias-NSZxbNZMkaNPyZ6v_fbwI" type="text" aria-invalid="false"
+                           aria-describedby="association-alias-NSZxbNZMkaNPyZ6v_fbwI-alert"
+                           autocomplete="off" data-lpignore="true" data-form-type="other"
+                           placeholder="salaries" value=""></label><span
+                           id="association-alias-NSZxbNZMkaNPyZ6v_fbwI-alert" class="text-red-700 text-xs"
+                           aria-hidden="true"></span></div>
+                        <div class="w-full col-span-6"><label for="association-fk-NSZxbNZMkaNPyZ6v_fbwI"
+                           class="flex flex-col items-start pb-6"><span class="text-sm">Foreign
+                           key</span><input
+                              class="w-full text-sm py-1 px-2 bg-white dark:bg-gray-900 dark:placeholder-gray-400"
+                              id="association-fk-NSZxbNZMkaNPyZ6v_fbwI" type="text" aria-invalid="false"
+                              aria-describedby="association-fk-NSZxbNZMkaNPyZ6v_fbwI-alert" autocomplete="off"
+                              data-lpignore="true" data-form-type="other" value="emp_no"></label><span
+                              id="association-fk-NSZxbNZMkaNPyZ6v_fbwI-alert" class="text-red-700 text-xs"
+                              aria-hidden="true"></span>
+                        </div>
+                        <div class="h-30"></div>
+                     </fieldset>
+                  </li>
+                  <li
+                     class="border border-gray-400 dark:border-gray-600 rounded bg-white dark:bg-gray-800 w-full h-full">
+                     <fieldset class="p-2 xs:p-4 pt-8 grid grid-cols-12 gap-y-0 gap-x-4 relative pb-0">
+                        <button
+                           type="button"
+                           class="p-1 hover:bg-gray-200 dark:hover:bg-gray-600 absolute top-0 right-0 p-1">
+                           <svg
+                              xmlns="http://www.w3.org/2000/svg" aria-hidden="false" class="h-6 w-6" fill="none"
+                              viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                              <title>delete</title>
+                              <path stroke-linecap="round" stroke-linejoin="round"
+                                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                              </path>
+                           </svg>
+                        </button>
+                        <div class="w-full col-span-6">
+                           <label for="association-type-t-EH47LxBLmUothImwJ3w"
+                              class="flex flex-col items-start pb-6">
+                              <span class="text-sm">Type</span>
+                              <select
+                                 id="association-type-t-EH47LxBLmUothImwJ3w"
+                                 class="bg-white dark:bg-gray-900 p-1 px-2 w-full cursor-pointer text-sm"
+                                 aria-invalid="false"
+                                 aria-describedby="association-type-t-EH47LxBLmUothImwJ3w-alert"
+                                 autocomplete="off" data-lpignore="true" data-form-type="other">
+                                 <option value="BelongsTo">belongs to</option>
+                                 <option value="HasOne">has one</option>
+                                 <option value="HasMany">has many</option>
+                                 <option value="ManyToMany">many to many</option>
+                              </select>
+                           </label>
+                           <span id="association-type-t-EH47LxBLmUothImwJ3w-alert"
+                              class="text-red-700 text-xs" aria-hidden="true"></span>
+                        </div>
+                        <div class="w-full col-span-6">
+                           <label for="association-target-model-t-EH47LxBLmUothImwJ3w"
+                              class="flex flex-col items-start pb-6">
+                              <span class="text-sm">Target
+                              model</span>
+                              <select id="association-target-model-t-EH47LxBLmUothImwJ3w"
+                                 class="bg-white dark:bg-gray-900 p-1 px-2 w-full cursor-pointer text-sm"
+                                 aria-invalid="false"
+                                 aria-describedby="association-target-model-t-EH47LxBLmUothImwJ3w-alert"
+                                 autocomplete="off" data-lpignore="true" data-form-type="other">
+                                 <option value="8AjE1F73O7k-d_8424U8A">employees</option>
+                                 <option value="UFlpanwFL8szZo5dtQct-">departments</option>
+                                 <option value="hs68eEzZVDTT7MEegYEvH">dept_emp</option>
+                                 <option value="zjM4z8Y5pvecG7TjIVajw">dept_manager</option>
+                                 <option value="Ky0xNM91RIzSFEKcWUqZS">titles</option>
+                                 <option value="Xq55KHZ19UT9ob31iT_D_">salaries</option>
+                              </select>
+                           </label>
+                           <span id="association-target-model-t-EH47LxBLmUothImwJ3w-alert"
+                              class="text-red-700 text-xs" aria-hidden="true"></span>
+                        </div>
+                        <div class="w-full col-span-6"><label for="association-alias-t-EH47LxBLmUothImwJ3w"
+                           class="flex flex-col items-start pb-6"><span class="text-sm">as</span><input
+                           class="w-full text-sm py-1 px-2 bg-white dark:bg-gray-900 dark:placeholder-gray-400"
+                           id="association-alias-t-EH47LxBLmUothImwJ3w" type="text" aria-invalid="false"
+                           aria-describedby="association-alias-t-EH47LxBLmUothImwJ3w-alert"
+                           autocomplete="off" data-lpignore="true" data-form-type="other"
+                           placeholder="titles" value=""></label><span
+                           id="association-alias-t-EH47LxBLmUothImwJ3w-alert" class="text-red-700 text-xs"
+                           aria-hidden="true"></span></div>
+                        <div class="w-full col-span-6"><label for="association-fk-t-EH47LxBLmUothImwJ3w"
+                           class="flex flex-col items-start pb-6"><span class="text-sm">Foreign
+                           key</span><input
+                              class="w-full text-sm py-1 px-2 bg-white dark:bg-gray-900 dark:placeholder-gray-400"
+                              id="association-fk-t-EH47LxBLmUothImwJ3w" type="text" aria-invalid="false"
+                              aria-describedby="association-fk-t-EH47LxBLmUothImwJ3w-alert" autocomplete="off"
+                              data-lpignore="true" data-form-type="other" value="emp_no"></label><span
+                              id="association-fk-t-EH47LxBLmUothImwJ3w-alert" class="text-red-700 text-xs"
+                              aria-hidden="true"></span>
+                        </div>
+                        <div class="h-30"></div>
+                     </fieldset>
+                  </li>
+                  <li
+                     class="border border-gray-400 dark:border-gray-600 rounded bg-white dark:bg-gray-800 w-full h-full">
+                     <fieldset class="p-2 xs:p-4 pt-8 grid grid-cols-12 gap-y-0 gap-x-4 relative pb-0">
+                        <button
+                           type="button"
+                           class="p-1 hover:bg-gray-200 dark:hover:bg-gray-600 absolute top-0 right-0 p-1">
+                           <svg
+                              xmlns="http://www.w3.org/2000/svg" aria-hidden="false" class="h-6 w-6" fill="none"
+                              viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                              <title>delete</title>
+                              <path stroke-linecap="round" stroke-linejoin="round"
+                                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                              </path>
+                           </svg>
+                        </button>
+                        <div class="w-full col-span-6">
+                           <label for="association-type-_Kv_6NuuzKQkuAJ7l9Ol1"
+                              class="flex flex-col items-start pb-6">
+                              <span class="text-sm">Type</span>
+                              <select
+                                 id="association-type-_Kv_6NuuzKQkuAJ7l9Ol1"
+                                 class="bg-white dark:bg-gray-900 p-1 px-2 w-full cursor-pointer text-sm"
+                                 aria-invalid="false"
+                                 aria-describedby="association-type-_Kv_6NuuzKQkuAJ7l9Ol1-alert"
+                                 autocomplete="off" data-lpignore="true" data-form-type="other">
+                                 <option value="BelongsTo">belongs to</option>
+                                 <option value="HasOne">has one</option>
+                                 <option value="HasMany">has many</option>
+                                 <option value="ManyToMany">many to many</option>
+                              </select>
+                           </label>
+                           <span id="association-type-_Kv_6NuuzKQkuAJ7l9Ol1-alert"
+                              class="text-red-700 text-xs" aria-hidden="true"></span>
+                        </div>
+                        <div class="w-full col-span-6">
+                           <label for="association-target-model-_Kv_6NuuzKQkuAJ7l9Ol1"
+                              class="flex flex-col items-start pb-6">
+                              <span class="text-sm">Target
+                              model</span>
+                              <select id="association-target-model-_Kv_6NuuzKQkuAJ7l9Ol1"
+                                 class="bg-white dark:bg-gray-900 p-1 px-2 w-full cursor-pointer text-sm"
+                                 aria-invalid="false"
+                                 aria-describedby="association-target-model-_Kv_6NuuzKQkuAJ7l9Ol1-alert"
+                                 autocomplete="off" data-lpignore="true" data-form-type="other">
+                                 <option value="8AjE1F73O7k-d_8424U8A">employees</option>
+                                 <option value="UFlpanwFL8szZo5dtQct-">departments</option>
+                                 <option value="hs68eEzZVDTT7MEegYEvH">dept_emp</option>
+                                 <option value="zjM4z8Y5pvecG7TjIVajw">dept_manager</option>
+                                 <option value="Ky0xNM91RIzSFEKcWUqZS">titles</option>
+                                 <option value="Xq55KHZ19UT9ob31iT_D_">salaries</option>
+                              </select>
+                           </label>
+                           <span id="association-target-model-_Kv_6NuuzKQkuAJ7l9Ol1-alert"
+                              class="text-red-700 text-xs" aria-hidden="true"></span>
+                        </div>
+                        <div class="w-full col-span-6"><label for="association-alias-_Kv_6NuuzKQkuAJ7l9Ol1"
+                           class="flex flex-col items-start pb-6"><span class="text-sm">as</span><input
+                           class="w-full text-sm py-1 px-2 bg-white dark:bg-gray-900 dark:placeholder-gray-400"
+                           id="association-alias-_Kv_6NuuzKQkuAJ7l9Ol1" type="text" aria-invalid="false"
+                           aria-describedby="association-alias-_Kv_6NuuzKQkuAJ7l9Ol1-alert"
+                           autocomplete="off" data-lpignore="true" data-form-type="other"
+                           value="employingDepartment"></label><span
+                           id="association-alias-_Kv_6NuuzKQkuAJ7l9Ol1-alert" class="text-red-700 text-xs"
+                           aria-hidden="true"></span></div>
+                        <div class="w-full col-span-6"><label for="association-fk-_Kv_6NuuzKQkuAJ7l9Ol1"
+                           class="flex flex-col items-start pb-6"><span class="text-sm">Foreign
+                           key</span><input
+                              class="w-full text-sm py-1 px-2 bg-white dark:bg-gray-900 dark:placeholder-gray-400"
+                              id="association-fk-_Kv_6NuuzKQkuAJ7l9Ol1" type="text" aria-invalid="false"
+                              aria-describedby="association-fk-_Kv_6NuuzKQkuAJ7l9Ol1-alert" autocomplete="off"
+                              data-lpignore="true" data-form-type="other" value="emp_no"></label><span
+                              id="association-fk-_Kv_6NuuzKQkuAJ7l9Ol1-alert" class="text-red-700 text-xs"
+                              aria-hidden="true"></span>
+                        </div>
+                        <div class="col-span-12 pb-5 flex w-full"><label class="mr-2 last:mr-0"><input
+                           class="dark:bg-gray-900" type="radio" autocomplete="off" data-lpignore="true"
+                           data-form-type="other" value="ThroughModel" checked=""><span
+                           class="pl-2 text-sm">Through model</span></label><label
+                           class="mr-2 last:mr-0"><input class="dark:bg-gray-900" type="radio"
+                           autocomplete="off" data-lpignore="true" data-form-type="other"
+                           value="ThroughTable"><span class="pl-2 text-sm">Through table</span></label>
+                        </div>
+                        <div class="w-full col-span-6">
+                           <label for="association-through-model-_Kv_6NuuzKQkuAJ7l9Ol1"
+                              class="flex flex-col items-start pb-6">
+                              <span class="text-sm">Through
+                              model</span>
+                              <select id="association-through-model-_Kv_6NuuzKQkuAJ7l9Ol1"
+                                 class="bg-white dark:bg-gray-900 p-1 px-2 w-full cursor-pointer text-sm"
+                                 aria-invalid="false"
+                                 aria-describedby="association-through-model-_Kv_6NuuzKQkuAJ7l9Ol1-alert"
+                                 autocomplete="off" data-lpignore="true" data-form-type="other">
+                                 <option value="8AjE1F73O7k-d_8424U8A">employees</option>
+                                 <option value="UFlpanwFL8szZo5dtQct-">departments</option>
+                                 <option value="hs68eEzZVDTT7MEegYEvH">dept_emp</option>
+                                 <option value="zjM4z8Y5pvecG7TjIVajw">dept_manager</option>
+                                 <option value="Ky0xNM91RIzSFEKcWUqZS">titles</option>
+                                 <option value="Xq55KHZ19UT9ob31iT_D_">salaries</option>
+                              </select>
+                           </label>
+                           <span id="association-through-model-_Kv_6NuuzKQkuAJ7l9Ol1-alert"
+                              class="text-red-700 text-xs" aria-hidden="true"></span>
+                        </div>
+                        <div class="w-full col-span-6"><label for="association-target-fk-_Kv_6NuuzKQkuAJ7l9Ol1"
+                           class="flex flex-col items-start pb-6"><span class="text-sm">Target FK</span><input
+                           class="w-full text-sm py-1 px-2 bg-white dark:bg-gray-900 dark:placeholder-gray-400"
+                           id="association-target-fk-_Kv_6NuuzKQkuAJ7l9Ol1" type="text"
+                           aria-invalid="false"
+                           aria-describedby="association-target-fk-_Kv_6NuuzKQkuAJ7l9Ol1-alert"
+                           autocomplete="off" data-lpignore="true" data-form-type="other"
+                           value="dept_no"></label><span
+                           id="association-target-fk-_Kv_6NuuzKQkuAJ7l9Ol1-alert" class="text-red-700 text-xs"
+                           aria-hidden="true"></span></div>
+                     </fieldset>
+                  </li>
+                  <li
+                     class="border border-gray-400 dark:border-gray-600 rounded bg-white dark:bg-gray-800 w-full h-full">
+                     <fieldset class="p-2 xs:p-4 pt-8 grid grid-cols-12 gap-y-0 gap-x-4 relative pb-0">
+                        <button
+                           type="button"
+                           class="p-1 hover:bg-gray-200 dark:hover:bg-gray-600 absolute top-0 right-0 p-1">
+                           <svg
+                              xmlns="http://www.w3.org/2000/svg" aria-hidden="false" class="h-6 w-6" fill="none"
+                              viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                              <title>delete</title>
+                              <path stroke-linecap="round" stroke-linejoin="round"
+                                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                              </path>
+                           </svg>
+                        </button>
+                        <div class="w-full col-span-6">
+                           <label for="association-type-a5-a5-VwngnYs7TE9y1ri"
+                              class="flex flex-col items-start pb-6">
+                              <span class="text-sm">Type</span>
+                              <select
+                                 id="association-type-a5-a5-VwngnYs7TE9y1ri"
+                                 class="bg-white dark:bg-gray-900 p-1 px-2 w-full cursor-pointer text-sm"
+                                 aria-invalid="false"
+                                 aria-describedby="association-type-a5-a5-VwngnYs7TE9y1ri-alert"
+                                 autocomplete="off" data-lpignore="true" data-form-type="other">
+                                 <option value="BelongsTo">belongs to</option>
+                                 <option value="HasOne">has one</option>
+                                 <option value="HasMany">has many</option>
+                                 <option value="ManyToMany">many to many</option>
+                              </select>
+                           </label>
+                           <span id="association-type-a5-a5-VwngnYs7TE9y1ri-alert"
+                              class="text-red-700 text-xs" aria-hidden="true"></span>
+                        </div>
+                        <div class="w-full col-span-6">
+                           <label for="association-target-model-a5-a5-VwngnYs7TE9y1ri"
+                              class="flex flex-col items-start pb-6">
+                              <span class="text-sm">Target
+                              model</span>
+                              <select id="association-target-model-a5-a5-VwngnYs7TE9y1ri"
+                                 class="bg-white dark:bg-gray-900 p-1 px-2 w-full cursor-pointer text-sm"
+                                 aria-invalid="false"
+                                 aria-describedby="association-target-model-a5-a5-VwngnYs7TE9y1ri-alert"
+                                 autocomplete="off" data-lpignore="true" data-form-type="other">
+                                 <option value="8AjE1F73O7k-d_8424U8A">employees</option>
+                                 <option value="UFlpanwFL8szZo5dtQct-">departments</option>
+                                 <option value="hs68eEzZVDTT7MEegYEvH">dept_emp</option>
+                                 <option value="zjM4z8Y5pvecG7TjIVajw">dept_manager</option>
+                                 <option value="Ky0xNM91RIzSFEKcWUqZS">titles</option>
+                                 <option value="Xq55KHZ19UT9ob31iT_D_">salaries</option>
+                              </select>
+                           </label>
+                           <span id="association-target-model-a5-a5-VwngnYs7TE9y1ri-alert"
+                              class="text-red-700 text-xs" aria-hidden="true"></span>
+                        </div>
+                        <div class="w-full col-span-6"><label for="association-alias-a5-a5-VwngnYs7TE9y1ri"
+                           class="flex flex-col items-start pb-6"><span class="text-sm">as</span><input
+                           class="w-full text-sm py-1 px-2 bg-white dark:bg-gray-900 dark:placeholder-gray-400"
+                           id="association-alias-a5-a5-VwngnYs7TE9y1ri" type="text" aria-invalid="false"
+                           aria-describedby="association-alias-a5-a5-VwngnYs7TE9y1ri-alert"
+                           autocomplete="off" data-lpignore="true" data-form-type="other"
+                           value="managedDepartment"></label><span
+                           id="association-alias-a5-a5-VwngnYs7TE9y1ri-alert" class="text-red-700 text-xs"
+                           aria-hidden="true"></span></div>
+                        <div class="w-full col-span-6"><label for="association-fk-a5-a5-VwngnYs7TE9y1ri"
+                           class="flex flex-col items-start pb-6"><span class="text-sm">Foreign
+                           key</span><input
+                              class="w-full text-sm py-1 px-2 bg-white dark:bg-gray-900 dark:placeholder-gray-400"
+                              id="association-fk-a5-a5-VwngnYs7TE9y1ri" type="text" aria-invalid="false"
+                              aria-describedby="association-fk-a5-a5-VwngnYs7TE9y1ri-alert" autocomplete="off"
+                              data-lpignore="true" data-form-type="other" value="emp_no"></label><span
+                              id="association-fk-a5-a5-VwngnYs7TE9y1ri-alert" class="text-red-700 text-xs"
+                              aria-hidden="true"></span>
+                        </div>
+                        <div class="col-span-12 pb-5 flex w-full"><label class="mr-2 last:mr-0"><input
+                           class="dark:bg-gray-900" type="radio" autocomplete="off" data-lpignore="true"
+                           data-form-type="other" value="ThroughModel" checked=""><span
+                           class="pl-2 text-sm">Through model</span></label><label
+                           class="mr-2 last:mr-0"><input class="dark:bg-gray-900" type="radio"
+                           autocomplete="off" data-lpignore="true" data-form-type="other"
+                           value="ThroughTable"><span class="pl-2 text-sm">Through table</span></label>
+                        </div>
+                        <div class="w-full col-span-6">
+                           <label for="association-through-model-a5-a5-VwngnYs7TE9y1ri"
+                              class="flex flex-col items-start pb-6">
+                              <span class="text-sm">Through
+                              model</span>
+                              <select id="association-through-model-a5-a5-VwngnYs7TE9y1ri"
+                                 class="bg-white dark:bg-gray-900 p-1 px-2 w-full cursor-pointer text-sm"
+                                 aria-invalid="false"
+                                 aria-describedby="association-through-model-a5-a5-VwngnYs7TE9y1ri-alert"
+                                 autocomplete="off" data-lpignore="true" data-form-type="other">
+                                 <option value="8AjE1F73O7k-d_8424U8A">employees</option>
+                                 <option value="UFlpanwFL8szZo5dtQct-">departments</option>
+                                 <option value="hs68eEzZVDTT7MEegYEvH">dept_emp</option>
+                                 <option value="zjM4z8Y5pvecG7TjIVajw">dept_manager</option>
+                                 <option value="Ky0xNM91RIzSFEKcWUqZS">titles</option>
+                                 <option value="Xq55KHZ19UT9ob31iT_D_">salaries</option>
+                              </select>
+                           </label>
+                           <span id="association-through-model-a5-a5-VwngnYs7TE9y1ri-alert"
+                              class="text-red-700 text-xs" aria-hidden="true"></span>
+                        </div>
+                        <div class="w-full col-span-6"><label for="association-target-fk-a5-a5-VwngnYs7TE9y1ri"
+                           class="flex flex-col items-start pb-6"><span class="text-sm">Target FK</span><input
+                           class="w-full text-sm py-1 px-2 bg-white dark:bg-gray-900 dark:placeholder-gray-400"
+                           id="association-target-fk-a5-a5-VwngnYs7TE9y1ri" type="text"
+                           aria-invalid="false"
+                           aria-describedby="association-target-fk-a5-a5-VwngnYs7TE9y1ri-alert"
+                           autocomplete="off" data-lpignore="true" data-form-type="other"
+                           value="dept_no"></label><span
+                           id="association-target-fk-a5-a5-VwngnYs7TE9y1ri-alert" class="text-red-700 text-xs"
+                           aria-hidden="true"></span></div>
+                     </fieldset>
+                  </li>
+                  <li>
+                     <button type="button"
+                        class="hover:bg-green-50 dark:hover:bg-green-900 border border-gray-400 dark:border-gray-600 rounded bg-white dark:bg-gray-800 w-full h-full p-2 hover:border-gray-800 dark:hover:border-gray-400 flex items-center justify-center min-h-16 text-lg border-dashed hover:border-gray-800">
+                        <span
+                           class="mr-2">
+                           <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-6 w-6"
+                              fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                              <path stroke-linecap="round" stroke-linejoin="round"
+                                 d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                           </svg>
+                        </span>
+                        Add association
+                     </button>
+                  </li>
+               </ul>
+            </div>
+         </form>
+      </main>
+      <!---JavaScript start---->
+      <script src="./home.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+       <script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"schema":{"id":"XSkFjXPXcg","name":"employee dataset","createdAt":"2020-10-01T00:00:00.000Z","updatedAt":"2020-10-01T00:00:00.000Z","forkedFrom":null,"models":[{"id":"8AjE1F73O7k-d_8424U8A","name":"employees","createdAt":"2020-10-01T00:00:00.000Z","updatedAt":"2020-10-01T00:00:00.000Z","fields":[{"id":"A-vb0CS7NR0L6wKkIDy-2","name":"emp_no","type":{"type":"INTEGER","unsigned":false,"autoincrement":true},"primaryKey":true,"required":true,"unique":false},{"id":"lmAJR97tTyctA_n7eV1jL","name":"birth_date","type":{"type":"DATE","defaultNow":false},"primaryKey":false,"required":true,"unique":false},{"id":"XMN1K4ZX4ry9tvbrXQssY","name":"first_name","type":{"type":"STRING","length":null},"primaryKey":false,"required":true,"unique":false},{"id":"WzM-w67wbBtvLRpJP39le","name":"last_name","type":{"type":"STRING","length":null},"primaryKey":false,"required":true,"unique":false},{"id":"bwdKnfLZR-vM8kocLSKU2","name":"gender","type":{"type":"ENUM","values":["M","F","O"]},"primaryKey":false,"required":true,"unique":false},{"id":"r-9WLhnQx4r3AV9HXm9Tp","name":"hire_date","type":{"type":"DATE","defaultNow":false},"primaryKey":false,"required":true,"unique":false}],"associations":[{"id":"NSZxbNZMkaNPyZ6v_fbwI","alias":null,"foreignKey":"emp_no","type":{"type":"HAS_MANY"},"sourceModelId":"8AjE1F73O7k-d_8424U8A","targetModelId":"Xq55KHZ19UT9ob31iT_D_"},{"id":"t-EH47LxBLmUothImwJ3w","alias":null,"foreignKey":"emp_no","type":{"type":"HAS_MANY"},"sourceModelId":"8AjE1F73O7k-d_8424U8A","targetModelId":"Ky0xNM91RIzSFEKcWUqZS"},{"id":"_Kv_6NuuzKQkuAJ7l9Ol1","alias":"employingDepartment","foreignKey":"emp_no","sourceModelId":"8AjE1F73O7k-d_8424U8A","targetModelId":"UFlpanwFL8szZo5dtQct-","type":{"type":"MANY_TO_MANY","through":{"type":"THROUGH_MODEL","modelId":"hs68eEzZVDTT7MEegYEvH"},"targetFk":"dept_no"}},{"id":"a5-a5-VwngnYs7TE9y1ri","alias":"managedDepartment","foreignKey":"emp_no","sourceModelId":"8AjE1F73O7k-d_8424U8A","targetModelId":"UFlpanwFL8szZo5dtQct-","type":{"type":"MANY_TO_MANY","through":{"type":"THROUGH_MODEL","modelId":"zjM4z8Y5pvecG7TjIVajw"},"targetFk":"dept_no"}}]},{"id":"UFlpanwFL8szZo5dtQct-","name":"departments","createdAt":"2020-10-01T00:00:00.000Z","updatedAt":"2020-10-01T00:00:00.000Z","fields":[{"id":"4AM-EcoHls7SZAuigtJDU","name":"dept_no","type":{"type":"STRING","length":null},"primaryKey":true,"required":true,"unique":false},{"id":"lNN9r8zHuGXpA3YdF4g4k","name":"dept_name","type":{"type":"STRING","length":null},"primaryKey":false,"required":true,"unique":false}],"associations":[{"id":"EyUlLtxd4iPrqkwrPLudZ","alias":"employee","foreignKey":"emp_no","sourceModelId":"UFlpanwFL8szZo5dtQct-","targetModelId":"8AjE1F73O7k-d_8424U8A","type":{"type":"MANY_TO_MANY","through":{"type":"THROUGH_MODEL","modelId":"hs68eEzZVDTT7MEegYEvH"},"targetFk":"dept_no"}},{"id":"eY1qNusWQ0oqsI34y6py-","alias":"manager","foreignKey":"emp_no","sourceModelId":"UFlpanwFL8szZo5dtQct-","targetModelId":"8AjE1F73O7k-d_8424U8A","type":{"type":"MANY_TO_MANY","through":{"type":"THROUGH_MODEL","modelId":"zjM4z8Y5pvecG7TjIVajw"},"targetFk":"dept_no"}},{"id":"-Yiu1xMzRABLxWHYPaUDz","alias":null,"foreignKey":"dept_no","type":{"type":"HAS_MANY"},"sourceModelId":"UFlpanwFL8szZo5dtQct-","targetModelId":"hs68eEzZVDTT7MEegYEvH"},{"id":"7MjAyLNnt15n4hdzXGTDI","alias":null,"foreignKey":"dept_no","type":{"type":"HAS_MANY"},"sourceModelId":"UFlpanwFL8szZo5dtQct-","targetModelId":"zjM4z8Y5pvecG7TjIVajw"}]},{"id":"hs68eEzZVDTT7MEegYEvH","name":"dept_emp","createdAt":"2020-10-01T00:00:00.000Z","updatedAt":"2020-10-01T00:00:00.000Z","fields":[{"id":"zFkGgfm-Toluits5kWMS2","name":"emp_no","type":{"type":"INTEGER","unsigned":false,"autoincrement":false},"primaryKey":true,"required":true,"unique":false},{"id":"fJV8AwXbXwk8S4U5LRscQ","name":"dept_no","type":{"type":"STRING","length":null},"primaryKey":true,"required":true,"unique":false},{"id":"gv7QQApHIRJ-SaR_TNpLq","name":"from_date","type":{"type":"DATE","defaultNow":false},"primaryKey":false,"required":true,"unique":false},{"id":"SVCYbkZ9-93k6FEvz_Y6c","name":"to_date","type":{"type":"DATE","defaultNow":false},"primaryKey":false,"required":true,"unique":false}],"associations":[{"id":"_586D3xgJkSivTqknKL72","alias":null,"foreignKey":"emp_no","type":{"type":"BELONGS_TO"},"sourceModelId":"hs68eEzZVDTT7MEegYEvH","targetModelId":"8AjE1F73O7k-d_8424U8A"},{"id":"ulGt5qF_EU4oQ0e1XHaf2","alias":null,"foreignKey":"dept_no","type":{"type":"BELONGS_TO"},"sourceModelId":"hs68eEzZVDTT7MEegYEvH","targetModelId":"UFlpanwFL8szZo5dtQct-"}]},{"id":"zjM4z8Y5pvecG7TjIVajw","name":"dept_manager","createdAt":"2020-10-01T00:00:00.000Z","updatedAt":"2020-10-01T00:00:00.000Z","fields":[{"id":"0hyro-92wnxcDbvsGZdk9","name":"emp_no","type":{"type":"INTEGER","unsigned":false,"autoincrement":false},"primaryKey":true,"required":true,"unique":false},{"id":"L47H5Ucjanj3kdT0mpJRl","name":"dept_no","type":{"type":"STRING","length":null},"primaryKey":true,"required":true,"unique":false},{"id":"Np1cS48kGJQCQ6p2S0N7H","name":"from_date","type":{"type":"DATE","defaultNow":false},"primaryKey":false,"required":true,"unique":false},{"id":"ZLotCICogF0mHOsLrCztQ","name":"to_date","type":{"type":"DATE","defaultNow":false},"primaryKey":false,"required":true,"unique":false}],"associations":[{"id":"qUvEJaNYjsipnAmHND9OF","alias":null,"foreignKey":"emp_no","type":{"type":"BELONGS_TO"},"sourceModelId":"zjM4z8Y5pvecG7TjIVajw","targetModelId":"8AjE1F73O7k-d_8424U8A"},{"id":"5igypfIRuRa5vQ1pWMIwD","alias":null,"foreignKey":"dept_no","type":{"type":"BELONGS_TO"},"sourceModelId":"zjM4z8Y5pvecG7TjIVajw","targetModelId":"UFlpanwFL8szZo5dtQct-"}]},{"id":"Ky0xNM91RIzSFEKcWUqZS","name":"titles","createdAt":"2020-10-01T00:00:00.000Z","updatedAt":"2020-10-01T00:00:00.000Z","fields":[{"id":"DDH7sfro2M5J2t_ihkR4u","name":"emp_no","type":{"type":"INTEGER","unsigned":false,"autoincrement":false},"primaryKey":true,"required":true,"unique":false},{"id":"b8L6CjPdW93HqnKGujr8o","name":"title","type":{"type":"STRING","length":null},"primaryKey":false,"required":true,"unique":false},{"id":"G3m0e2Iw8DTTDeSI8HeRo","name":"from_date","type":{"type":"DATE","defaultNow":false},"primaryKey":true,"required":true,"unique":false},{"id":"f9aEgZ0FqhY4Gd_pUeYFr","name":"to_date","type":{"type":"DATE","defaultNow":false},"primaryKey":false,"required":true,"unique":false}],"associations":[{"id":"J3HiCOzScrq4cBAeZJ5RX","alias":null,"foreignKey":"emp_no","type":{"type":"BELONGS_TO"},"sourceModelId":"Ky0xNM91RIzSFEKcWUqZS","targetModelId":"8AjE1F73O7k-d_8424U8A"}]},{"id":"Xq55KHZ19UT9ob31iT_D_","name":"salaries","createdAt":"2020-10-01T00:00:00.000Z","updatedAt":"2020-10-01T00:00:00.000Z","fields":[{"id":"23LbpyOTggRrwmND6V314","name":"emp_no","type":{"type":"INTEGER","unsigned":false,"autoincrement":false},"primaryKey":true,"required":true,"unique":false},{"id":"Im-k5JXXFtcf9XB4VPlyL","name":"salary","type":{"type":"INTEGER","unsigned":false,"autoincrement":false},"primaryKey":false,"required":true,"unique":false},{"id":"nxAaXuj2RcZCcSpNlhKJv","name":"from_date","type":{"type":"DATE","defaultNow":false},"primaryKey":true,"required":true,"unique":false},{"id":"Slf0paEcJRPTG8q-5P0_e","name":"to_date","type":{"type":"DATE","defaultNow":false},"primaryKey":false,"required":false,"unique":false}],"associations":[{"id":"ufW25GBb27TDBH5NgCJrg","alias":null,"foreignKey":"emp_no","type":{"type":"BELONGS_TO"},"sourceModelId":"Xq55KHZ19UT9ob31iT_D_","targetModelId":"8AjE1F73O7k-d_8424U8A"}]}]},"meta":{"schemaId":"XSkFjXPXcg","isExample":true,"displayName":"Employees","description":["The Employees sample database is a temporal database for tracking salary, title and department for a company's employees over time.","The schema was created by Fusheng Wang and Carlo Zaniolo under the [Creative Commons Attribution-ShareAlike 3.0 Unported License](https://creativecommons.org/licenses/by-sa/3.0/legalcode) and is available XML format at \u003chttp://timecenter.cs.aau.dk/software.htm\u003e.","The relational schema for this data was created by Giuseppe Maxia and the data was converted from XML to relational by Patrick Crews. The schema and data are available at \u003chttps://github.com/datacharmer/test_db\u003e.","The schema was converted to TypeScript for Sequelize UI by Tom Schuster and is available at \u003chttps://github.com/tomjschuster/sequelize-ui-ts/blob/main/src/api/schema/examples/employees.ts\u003e."],"slug":"employees","license":"cc-by-sa-3","source":"https://github.com/tomjschuster/sequelize-ui-ts/blob/main/src/api/schema/examples/employees.ts","icon":"user-group"}},"__N_SSG":true},"page":"/schema/[slug]","query":{"slug":"employees"},"buildId":"NrdMHAkdonayHFSEZWFCd","isFallback":false,"dynamicIds":[7007],"gsp":true,"scriptLoader":[]}</script>
+   </body>
+</html>
